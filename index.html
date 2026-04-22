@@ -25,34 +25,32 @@ nav{
   background:transparent;
   display:flex;align-items:center;
   justify-content:flex-end; 
-  padding:24px 48px; /* Aumentato lo spazio iniziale */
-  height: 90px; /* Altezza fissa iniziale */
+  padding:24px 48px;
+  height:90px;
   transition:all 0.4s ease;
 }
 nav.scrolled{
   background:rgba(14,47,94,0.96);
   backdrop-filter:blur(10px);
-  padding:15px 48px; /* Barra più spessa quando si scorre */
-  height: 75px; /* Altezza fissa quando si scorre */
+  padding:15px 48px;
+  height:75px;
   box-shadow:0 2px 20px rgba(0,0,0,0.3);
 }
 
-/* --- EFFETTO LOGO CENTRATO CORRETTO --- */
 .logo {
-  position: absolute;
-  left: 48px;
-  top: 50%; /* Lo spinge a metà altezza */
-  transform: translateY(-50%); /* Lo centra perfettamente in verticale */
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+  position:absolute;
+  left:48px;
+  top:50%;
+  transform:translateY(-50%);
+  transition:all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 nav.scrolled .logo {
-  left: 50%;
-  transform: translate(-50%, -50%); /* Lo centra sia in orizzontale che in verticale! */
+  left:50%;
+  transform:translate(-50%, -50%);
 }
-/* -------------------------------------- */
 
 nav img{height:65px;transition:height 0.3s;}
-nav.scrolled img{height:52px;} /* Grandezza sistemata per stare dentro la barra */
+nav.scrolled img{height:52px;}
 
 nav ul{list-style:none;display:flex;gap:36px}
 nav ul a{
@@ -77,7 +75,7 @@ nav ul a:hover::after{right:0}
 }
 #hero-bg{
   position:absolute;inset:0;
-  background-image: url('tintesterna.png');
+  background-image:url('tintesterna.png');
   background-size:cover;background-position:center;
   filter:brightness(0.32);z-index:0;
 }
@@ -137,21 +135,33 @@ section{padding:90px 40px}
 }
 .serv-card.visible{animation:cardIn 0.65s ease forwards}
 .serv-card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 14px 40px rgba(26,74,138,0.22)}
+
 .serv-card-bg{
   position:absolute;inset:0;
+  background:#000;
+}
+.slide{
+  position:absolute;inset:0;
   background-size:cover;background-position:center;
-  transition:transform 0.5s ease;
+  opacity:0;
+  transition:transform 0.5s ease,filter 0.5s ease;
   filter:brightness(0.55);
 }
-.serv-card:hover .serv-card-bg{transform:scale(1.07);filter:brightness(0.45)}
+.serv-card:hover .slide{
+  transform:scale(1.07);
+  filter:brightness(0.45);
+}
+
 .serv-card-overlay{
   position:absolute;inset:0;
   background:linear-gradient(to top,rgba(14,47,94,0.88) 0%,rgba(14,47,94,0.1) 60%);
+  z-index:1;
 }
 .serv-card-content{
   position:absolute;inset:0;
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:28px 24px;
+  z-index:2;
 }
 .serv-card-content .ico{font-size:2.4rem;margin-bottom:10px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))}
 .serv-card-content h3{
@@ -166,6 +176,15 @@ section{padding:90px 40px}
   color:#fff;font-size:0.75rem;font-family:'Oswald',sans-serif;letter-spacing:1px;
   border-radius:2px;
 }
+
+@keyframes slide2_1 { 0%, 45% { opacity: 1; } 55%, 100% { opacity: 0; } }
+@keyframes slide2_2 { 0%, 45% { opacity: 0; } 55%, 95% { opacity: 1; } 100% { opacity: 0; } }
+
+@keyframes slide5_1 { 0%, 15% { opacity: 1; } 20%, 100% { opacity: 0; } }
+@keyframes slide5_2 { 0%, 15% { opacity: 0; } 20%, 35% { opacity: 1; } 40%, 100% { opacity: 0; } }
+@keyframes slide5_3 { 0%, 35% { opacity: 0; } 40%, 55% { opacity: 1; } 60%, 100% { opacity: 0; } }
+@keyframes slide5_4 { 0%, 55% { opacity: 0; } 60%, 75% { opacity: 1; } 80%, 100% { opacity: 0; } }
+@keyframes slide5_5 { 0%, 75% { opacity: 0; } 80%, 95% { opacity: 1; } 100% { opacity: 0; } }
 
 #chi-siamo{
   background:linear-gradient(135deg,var(--blu2) 0%,var(--blu) 100%);
@@ -187,7 +206,6 @@ section{padding:90px 40px}
 .info-box-header{
   display:flex;align-items:center;gap:16px;margin-bottom:8px;
 }
-.info-box-header img{height:70px;filter:drop-shadow(0 2px 8px rgba(26,74,138,0.2))}
 .info-box-header h3{
   font-family:'Oswald',sans-serif;font-size:1.5rem;
   color:var(--blu);letter-spacing:1px;line-height:1.3;
@@ -240,7 +258,7 @@ footer span{color:var(--arancio)}
 }
 @media(max-width:768px){
   nav{padding:10px 20px; height: 70px;}
-  .logo{left: 20px; transform: translateY(-50%);} /* Anche da cellulare va tenuto il calcolo verticale */
+  .logo{left: 20px; transform: translateY(-50%);} 
   nav.scrolled .logo {transform: translate(-50%, -50%);}
   nav ul{gap:18px}
   nav ul a{font-size:0.85rem;letter-spacing:0.5px}
@@ -276,7 +294,9 @@ footer span{color:var(--arancio)}
   <div class="servizi-grid">
 
     <div class="serv-card">
-      <div class="serv-card-bg" style="background-image: url('tintesterna.png');"></div>
+      <div class="serv-card-bg">
+        <div class="slide" style="background-image: url('tintesterna.png'); opacity: 1;"></div>
+      </div>
       <div class="serv-card-overlay"></div>
       <div class="serv-card-content">
         <span class="serv-tag">ESTERNO</span>
@@ -286,7 +306,10 @@ footer span{color:var(--arancio)}
     </div>
 
     <div class="serv-card">
-      <div class="serv-card-bg" style="background-image: url('tintinterna.png');"></div>
+      <div class="serv-card-bg">
+        <div class="slide" style="background-image: url('tintinterna.png'); animation: slide2_1 10s infinite alternate;"></div>
+        <div class="slide" style="background-image: url('tinteggiaturainterna1.png'); animation: slide2_2 10s infinite alternate;"></div>
+      </div>
       <div class="serv-card-overlay"></div>
       <div class="serv-card-content">
         <span class="serv-tag">INTERNO</span>
@@ -296,7 +319,13 @@ footer span{color:var(--arancio)}
     </div>
 
     <div class="serv-card">
-      <div class="serv-card-bg" style="background-image: url('cappottoesterno.png');"></div>
+      <div class="serv-card-bg">
+        <div class="slide" style="background-image: url('cappottoesterno.png'); animation: slide5_1 20s infinite;"></div>
+        <div class="slide" style="background-image: url('cappottotermico1.png'); animation: slide5_2 20s infinite;"></div>
+        <div class="slide" style="background-image: url('cappottotermico2.png'); animation: slide5_3 20s infinite;"></div>
+        <div class="slide" style="background-image: url('cappottotermico3.png'); animation: slide5_4 20s infinite;"></div>
+        <div class="slide" style="background-image: url('cappottotermico4.png'); animation: slide5_5 20s infinite;"></div>
+      </div>
       <div class="serv-card-overlay"></div>
       <div class="serv-card-content">
         <span class="serv-tag">ISOLAMENTO</span>
@@ -306,7 +335,9 @@ footer span{color:var(--arancio)}
     </div>
 
     <div class="serv-card">
-      <div class="serv-card-bg" style="background-image: url('ristrotturazione.png');"></div>
+      <div class="serv-card-bg">
+        <div class="slide" style="background-image: url('ristrotturazione.png'); opacity: 1;"></div>
+      </div>
       <div class="serv-card-overlay"></div>
       <div class="serv-card-content">
         <span class="serv-tag">EDILIZIA</span>
@@ -316,7 +347,10 @@ footer span{color:var(--arancio)}
     </div>
 
     <div class="serv-card">
-      <div class="serv-card-bg" style="background-image: url('cartongesso.png');"></div>
+      <div class="serv-card-bg">
+        <div class="slide" style="background-image: url('cartongesso.png'); animation: slide2_1 10s infinite alternate;"></div>
+        <div class="slide" style="background-image: url('cartongesso1.png'); animation: slide2_2 10s infinite alternate;"></div>
+      </div>
       <div class="serv-card-overlay"></div>
       <div class="serv-card-content">
         <span class="serv-tag">PARETI</span>
@@ -374,7 +408,7 @@ footer span{color:var(--arancio)}
       </div>
     </div>
     <div class="map-box">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2786.411493524541!2d11.46315420635146!3d45.70278111748792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4778b5f942c832d7%3A0xb45d53fe44654ce6!2sV.%20Padre%20Leopoldo%2C%2027%2C%2036016%20Thiene%20VI!5e0!3m2!1sit!2sit!4v1776870300482!5m2!1sit!2sit" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2785.874533033501!2d11.4782352!3d45.7135316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4778ce3f6c1f061b%3A0x6b18a221f0747683!2sVia%20Padre%20Leopoldo%2C%2027%2C%2036016%20Thiene%20VI!5e0!3m2!1sit!2sit!4v1710000000000!5m2!1sit!2sit" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
 </section>
